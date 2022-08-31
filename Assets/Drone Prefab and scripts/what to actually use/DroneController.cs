@@ -68,7 +68,7 @@ namespace SIGVerse.Drone
 				Drone.AddRelativeTorque(0, 0, 3);
 			}
 
-			if (!moving)
+			/*if (!moving)
 			{
 				//tilt drone left
 				if (Input.GetKey(KeyCode.A))
@@ -80,7 +80,7 @@ namespace SIGVerse.Drone
 				{
 					Drone.AddRelativeTorque(0, 0, 0);
 				}
-			}
+			}*/
 
 			//if tilt too big(stabilizes drone on x-axis)
 			if (DroneRotation.x > 10 && DroneRotation.x <= 180)
