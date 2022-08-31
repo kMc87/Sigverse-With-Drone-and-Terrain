@@ -41,6 +41,7 @@ namespace SIGVerse.Drone
             }
             else
             {
+                propSpeed = 2255f;
                 transform.Rotate(0f, 0f, propSpeed * Time.deltaTime);
 
             }

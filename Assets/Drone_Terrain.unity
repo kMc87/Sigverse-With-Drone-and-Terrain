@@ -425,6 +425,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361184, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_HDR
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361184, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_AllowMSAA
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361184, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361184, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5066629205140361186, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1788,7 +1808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039150342}
   m_LocalRotation: {x: 0.23638606, y: 0.013335103, z: -0.010665059, w: 0.9715092}
-  m_LocalPosition: {x: 290.64102, y: 85.23122, z: 301.81668}
+  m_LocalPosition: {x: 290.64102, y: 472, z: -278}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
