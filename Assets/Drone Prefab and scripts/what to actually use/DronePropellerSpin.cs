@@ -10,7 +10,7 @@ namespace SIGVerse.Drone
 {
     public class DronePropellerSpin : MonoBehaviour
     {
-        private float propSpeed = 2255f;
+        public float propSpeed = 2255f;
         //when holding space AND selected base hits a collider propellers will come to a stop
         public GameObject basePlate;
         // Start is called before the first frame update
@@ -24,18 +24,20 @@ namespace SIGVerse.Drone
         {
 
             checkDirection();
-            
+
         }
         void checkDirection()
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
+                propSpeed = propSpeed / .99f;
+
                 transform.Rotate(0f, 0f, -propSpeed * Time.deltaTime);
 
             }
             else if (Input.GetKey(KeyCode.Space))
             {
-                propSpeed = propSpeed / .8f;
+                propSpeed = propSpeed / 2;
                 transform.Rotate(0f, 0f, -propSpeed * Time.deltaTime);
                
             }

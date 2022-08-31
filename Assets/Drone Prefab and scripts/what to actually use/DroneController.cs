@@ -5,12 +5,14 @@ using UnityEngine.EventSystems;
 using UnityStandardAssets_1_1_2.CrossPlatformInput;
 using UnityStandardAssets_1_1_2.Characters.ThirdPerson;
 
+
 namespace SIGVerse.Drone
 {
 	public class DroneController : MonoBehaviour
 	{
 
 		public Rigidbody Drone;
+		DronePropellerSpin propellerSpin;
 
 
 		public int DirectionalSpeed = 25;
@@ -71,12 +73,12 @@ namespace SIGVerse.Drone
 				//tilt drone left
 				if (Input.GetKey(KeyCode.A))
 				{
-					Drone.AddRelativeTorque(0, Tilt / -1, 0);
+					Drone.AddRelativeTorque(0, 0, 0);
 				}
 				//tilt drone right
 				if (Input.GetKey(KeyCode.D))
 				{
-					Drone.AddRelativeTorque(0, Tilt, 0);
+					Drone.AddRelativeTorque(0, 0, 0);
 				}
 			}
 
@@ -116,8 +118,10 @@ namespace SIGVerse.Drone
             #region drone controls
             if (!landing)
             {
-				Drone.AddForce(0, 7.5f, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
-										   //9.8f(f makes it a float rather than a double
+
+				Drone.AddForce(0, 8f, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+										 //9.8f(f makes it a float rather than a double
+
 				if (moving == false)
 				{
 
@@ -174,15 +178,36 @@ namespace SIGVerse.Drone
 						transform.Rotate(0f, rotationSpeed, 0f, Space.Self);
 
 					}
-
 					//call land funciton
-					if (Input.GetKey(KeyCode.Space))
+					if (Input.GetKeyDown(KeyCode.Space))
 					{
 						//call land and set land bool to true so that you just descend from the selected location
-						land();
+						//land();
+						Drone.AddRelativeForce(0, (-LiftSpeed)*Time.deltaTime, 0);
+
 					}
 				}
 			
+			}
+            else
+            {
+				if (propellerSpin.propSpeed < 2255f)
+				{
+					if (propellerSpin.propSpeed == 0)
+					{
+						Drone.AddForce(0, (-9.8f)*Time.deltaTime, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+													//9.8f(f makes it a float rather than a double
+					}
+					else
+					{
+						for (int i = 8; i > 0; i--)
+						{
+							Drone.AddForce(0, i, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+													//9.8f(f makes it a float rather than a double
+						}
+					}
+				}
+
 			}
 
 			#endregion
@@ -192,11 +217,12 @@ namespace SIGVerse.Drone
         {
 			landing = true;
 
+
 			//drop the drone at a slowish speed
-			Drone.AddForce(0, -15, 0);
+			Drone.AddForce(0, (-LiftSpeed)* Time.deltaTime, 0);
 
 			//stop landing
-			if (Input.GetKey(KeyCode.Space))
+			if (Input.GetKeyUp(KeyCode.Space))
 			{
 				landing = false;
 			}
