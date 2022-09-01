@@ -25,11 +25,11 @@ namespace SIGVerse.Drone
 
 		private Vector3 DroneRotation;
 
-        private void Start()
-        {
-        }
+		private void Start()
+		{
+		}
 
-        void Update()
+		void Update()
 		{
 
 		}
@@ -42,12 +42,176 @@ namespace SIGVerse.Drone
 			TiltCorrection();
 
 			DroneControls();
-	
+
 
 		}
-		void TiltCorrection()
+        #region Controls
+        void DroneControls()
+		{
+			landing = false;
+
+			if (Input.GetKey(KeyCode.K))
+			{
+				ScreenshotHandler.takeScreenShot_Static(500, 500);
+			}
+
+			#region drone controls
+			if (!landing)
+			{
+
+				Drone.AddForce(0, 8f, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+										 //9.8f(f makes it a float rather than a double
+
+				if (moving == false)
+				{
+					UpArrowDown();
+					DownArrowDown();
+					LeftArrowDown();
+					RightArrowDown();
+					DKeyDown();
+					AKeyDown();
+					SKeyDown();
+					WKeyDown();
+					SpaceKeyDown();
+				}
+
+			}
+			else
+			{
+				if (propellerSpin.propSpeed < 2255f)
+				{
+					if (propellerSpin.propSpeed == 0)
+					{
+						Drone.AddForce(0, (-9.8f) * Time.deltaTime, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+																	   //9.8f(f makes it a float rather than a double
+					}
+					else
+					{
+						for (int i = 8; i > 0; i--)
+						{
+							Drone.AddForce(0, i, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
+													//9.8f(f makes it a float rather than a double
+						}
+					}
+				}
+
+			}
+
+			#endregion
+		}
+		void UpArrowDown()
+		{
+			//lift
+			if (Input.GetKey(KeyCode.UpArrow))
+			{
+				Drone.AddRelativeForce(0, LiftSpeed, 0);
+
+			}
+		}
+		void DownArrowDown()
         {
-			#region tilt correction
+			//drop
+			if (Input.GetKey(KeyCode.DownArrow))
+			{
+				Drone.AddRelativeForce(0, -LiftSpeed, 0);
+
+			}
+		}
+		void LeftArrowDown()
+        {
+			//rotate left
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				transform.Rotate(0f, -rotationSpeed, 0f, Space.Self);
+
+			}
+		}
+		void RightArrowDown()
+        {
+			//rotate right
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				transform.Rotate(0f, rotationSpeed, 0f, Space.Self);
+
+			}
+		}
+		void WKeyDown()
+        {
+			//forward
+			if (Input.GetKey(KeyCode.W))
+			{
+				Drone.AddRelativeForce(0, 0, DirectionalSpeed);
+				Drone.AddRelativeTorque(10, 0, 0);
+			}
+		}
+		void SKeyDown()
+        {
+			//backward
+			if (Input.GetKey(KeyCode.S))
+			{
+				Drone.AddRelativeForce(0, 0, -DirectionalSpeed);
+				Drone.AddRelativeTorque(-10, 0, 0);
+
+			}
+		}
+		void AKeyDown()
+        {
+			//right
+			if (Input.GetKey(KeyCode.D))
+			{
+				Drone.AddRelativeForce(DirectionalSpeed, 0, 0);
+				Drone.AddRelativeTorque(0, 0, -10);
+
+			}
+		}
+		void DKeyDown()
+        {
+			//left
+			if (Input.GetKey(KeyCode.A))
+			{
+				Drone.AddRelativeForce(-DirectionalSpeed, 0, 0);
+				Drone.AddRelativeTorque(0, 0, 10);
+
+			}
+		}
+		void SpaceKeyDown()
+        {
+			//call land funciton
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				//call land and set land bool to true so that you just descend from the selected location
+				//land();
+				Drone.AddRelativeForce(0, (-LiftSpeed) * Time.deltaTime, 0);
+
+			}
+		}
+        #endregion
+        #region landing
+        void land()
+        {
+			landing = true;
+
+
+			//drop the drone at a slowish speed
+			Drone.AddForce(0, (-LiftSpeed)* Time.deltaTime, 0);
+
+			//stop landing
+			if (Input.GetKeyUp(KeyCode.Space))
+			{
+				landing = false;
+			}
+			
+		}
+		#endregion
+		#region tilt correction
+		void TiltCorrection()
+		{
+			ZTilt();
+			XTilt();
+		}
+
+		void ZTilt()
+        {
 			//if tilt too big(stabilizes drone on z-axis)
 			if (DroneRotation.z > 10 && DroneRotation.z <= 180)
 			{
@@ -67,20 +231,10 @@ namespace SIGVerse.Drone
 			{
 				Drone.AddRelativeTorque(0, 0, 3);
 			}
+		}
 
-			/*if (!moving)
-			{
-				//tilt drone left
-				if (Input.GetKey(KeyCode.A))
-				{
-					Drone.AddRelativeTorque(0, 0, 0);
-				}
-				//tilt drone right
-				if (Input.GetKey(KeyCode.D))
-				{
-					Drone.AddRelativeTorque(0, 0, 0);
-				}
-			}*/
+		void XTilt()
+        {
 
 			//if tilt too big(stabilizes drone on x-axis)
 			if (DroneRotation.x > 10 && DroneRotation.x <= 180)
@@ -102,133 +256,8 @@ namespace SIGVerse.Drone
 				Drone.AddRelativeTorque(3, 0, 0);
 			}
 
-
-			#endregion
 		}
 
-		void DroneControls()
-        {
-			landing = false;
-			
-			if(Input.GetKey(KeyCode.K))
-            {
-				ScreenshotHandler.takeScreenShot_Static(500, 500);
-            }
-
-            #region drone controls
-            if (!landing)
-            {
-
-				Drone.AddForce(0, 8f, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
-										 //9.8f(f makes it a float rather than a double
-
-				if (moving == false)
-				{
-
-					//forward
-					if (Input.GetKey(KeyCode.W))
-					{
-						Drone.AddRelativeForce(0, 0, DirectionalSpeed);
-						Drone.AddRelativeTorque(10, 0, 0);
-					}
-
-					//backward
-					if (Input.GetKey(KeyCode.S))
-					{
-						Drone.AddRelativeForce(0, 0, -DirectionalSpeed);
-						Drone.AddRelativeTorque(-10, 0, 0);
-
-					}
-					//left
-					if (Input.GetKey(KeyCode.A))
-					{
-						Drone.AddRelativeForce(-DirectionalSpeed, 0, 0);
-						Drone.AddRelativeTorque(0, 0, 10);
-
-					}
-					//right
-					if (Input.GetKey(KeyCode.D))
-					{
-						Drone.AddRelativeForce(DirectionalSpeed, 0, 0);
-						Drone.AddRelativeTorque(0, 0, -10);
-
-					}
-
-					//lift
-					if (Input.GetKey(KeyCode.UpArrow))
-					{
-						Drone.AddRelativeForce(0, LiftSpeed, 0);
-
-					}
-					//drop
-					if (Input.GetKey(KeyCode.DownArrow))
-					{
-						Drone.AddRelativeForce(0, -LiftSpeed, 0);
-
-					}
-					//rotate left
-					if (Input.GetKey(KeyCode.LeftArrow))
-					{
-						transform.Rotate(0f, -rotationSpeed, 0f, Space.Self);
-
-					}
-					//rotate right
-					if (Input.GetKey(KeyCode.RightArrow))
-					{
-						transform.Rotate(0f, rotationSpeed, 0f, Space.Self);
-
-					}
-					//call land funciton
-					if (Input.GetKeyDown(KeyCode.Space))
-					{
-						//call land and set land bool to true so that you just descend from the selected location
-						//land();
-						Drone.AddRelativeForce(0, (-LiftSpeed)*Time.deltaTime, 0);
-
-					}
-				}
-			
-			}
-            else
-            {
-				if (propellerSpin.propSpeed < 2255f)
-				{
-					if (propellerSpin.propSpeed == 0)
-					{
-						Drone.AddForce(0, (-9.8f)*Time.deltaTime, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
-													//9.8f(f makes it a float rather than a double
-					}
-					else
-					{
-						for (int i = 8; i > 0; i--)
-						{
-							Drone.AddForce(0, i, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
-													//9.8f(f makes it a float rather than a double
-						}
-					}
-				}
-
-			}
-
-			#endregion
-		}
-        #region landing
-		void land()
-        {
-			landing = true;
-
-
-			//drop the drone at a slowish speed
-			Drone.AddForce(0, (-LiftSpeed)* Time.deltaTime, 0);
-
-			//stop landing
-			if (Input.GetKeyUp(KeyCode.Space))
-			{
-				landing = false;
-			}
-			
-		}
-
-        #endregion
-    }
+		#endregion
+	}
 }
