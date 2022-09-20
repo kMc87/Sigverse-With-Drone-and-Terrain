@@ -107,13 +107,16 @@ namespace SIGVerse.Drone
 		}
 
 		void DroneControls()
-        {
+		{
 			landing = false;
 
-			screenshotter();
-            #region drone controls
-            if (!landing)
-            {
+			if (Input.GetKey(KeyCode.K))
+			{
+				screenshotter();
+			}
+			#region drone controls
+			if (!landing)
+			{
 
 				Drone.AddForce(0, 8f, 0);//keeps the drone from losing height quickly, since the drone is set to a rigidbody itll fall at 9.8 until it hits a collider
 										 //9.8f(f makes it a float rather than a double
@@ -128,13 +131,42 @@ namespace SIGVerse.Drone
 					{
 						backward();
 					}
-					leftward();
-					rightward();
-					lift();
-					dropper();
-					TiltLeft();
-					TiltRight();
-					lander();
+					//left
+					if (Input.GetKey(KeyCode.A))
+					{
+						leftward();
+
+					}
+					//right
+					if (Input.GetKey(KeyCode.D))
+					{
+						rightward();
+					}
+					//lift
+					if (Input.GetKey(KeyCode.UpArrow))
+					{
+						lift();
+					}
+					//drop
+					if (Input.GetKey(KeyCode.DownArrow))
+					{
+						dropper();
+					}
+					//rotate left
+					if (Input.GetKey(KeyCode.LeftArrow))
+					{
+						TiltLeft();
+					}
+					//rotate right
+					if (Input.GetKey(KeyCode.RightArrow))
+					{
+						TiltRight();
+					}
+					//call land funciton
+					if (Input.GetKeyDown(KeyCode.Space))
+					{
+						lander();
+					}
 				}
 			
 			}
@@ -179,86 +211,71 @@ namespace SIGVerse.Drone
 
 		}
 
-        void leftward()
+		public void leftward()
         {
-			//left
-			if (Input.GetKey(KeyCode.A))
-			{
-				Drone.AddRelativeForce(-DirectionalSpeed, 0, 0);
+
+				Drone.AddRelativeForce(-DirectionalSpeed*10, 0, 0);
 				Drone.AddRelativeTorque(0, 0, 15);
 
-			}
+			
 		}
 
-		void rightward()
+		public void rightward()
         {
-			//right
-			if (Input.GetKey(KeyCode.D))
-			{
-				Drone.AddRelativeForce(DirectionalSpeed, 0, 0);
+
+				Drone.AddRelativeForce(DirectionalSpeed*10, 0, 0);
 				Drone.AddRelativeTorque(0, 0, -15);
 
-			}
+			
 		}
 
-		void lift()
+		public void lift()
         {
-			//lift
-			if (Input.GetKey(KeyCode.UpArrow))
-			{
+
 				Drone.AddRelativeForce(0, LiftSpeed, 0);
 
-			}
+			
 		}
 
-		void dropper()
+		public void dropper()
         {
-			//drop
-			if (Input.GetKey(KeyCode.DownArrow))
-			{
+
 				Drone.AddRelativeForce(0, -LiftSpeed, 0);
 
-			}
+			
 		}
 
-		void TiltLeft()
+		public void TiltLeft()
         {
-			//rotate left
-			if (Input.GetKey(KeyCode.LeftArrow))
-			{
+
 				transform.Rotate(0f, -rotationSpeed, 0f, Space.Self);
 
-			}
+			
 		}
 
-		void TiltRight()
+		public void TiltRight()
         {
-			//rotate right
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
+
 				transform.Rotate(0f, rotationSpeed, 0f, Space.Self);
 
-			}
+			
 		}
-		void lander()
+		public void lander()
         {
-			//call land funciton
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
+
 				//call land and set land bool to true so that you just descend from the selected location
 				//land();
 				Drone.AddRelativeForce(0, (-LiftSpeed) * Time.deltaTime, 0);
 
-			}
+			
 		}
 
-		void screenshotter()
+		public void screenshotter()
         {
 
-			if (Input.GetKey(KeyCode.K))
-			{
+
 				ScreenshotHandler.takeScreenShot_Static(500, 500);
-			}
+			
 		}
 
 #region landing

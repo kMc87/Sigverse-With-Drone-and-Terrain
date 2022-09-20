@@ -29,18 +29,25 @@ namespace SIGVerse.Drone
 
 		protected override void SubscribeMessageCallback(RosBridge.geometry_msgs.Twist twist)
 		{
-			dc.forward();
-			/*
+
 			if(twist.linear.x>0)
             {
 				dc.forward();
 				Debug.Log("forward");
 			}
-			else if(twist.linear.x<0)
+			if(twist.linear.x<0)
             {
 				dc.backward();
             }
-			*.
+			if (twist.linear.z < 0)
+			{
+				dc.rightward();
+			}
+			if (twist.linear.z < 0)
+			{
+				dc.leftward();
+			}
+
 			/*
 			float linearVel = Mathf.Sqrt(Mathf.Pow(twist.linear.x, 2) + Mathf.Pow(twist.linear.y, 2));
 
@@ -64,7 +71,6 @@ namespace SIGVerse.Drone
 
 		void FixedUpdate()
 		{
-			Debug.Log("correct");
 
 			/*
 			if (Mathf.Abs(this.baseFootprint.forward.y) < wheelInclinationThreshold) { return; }
