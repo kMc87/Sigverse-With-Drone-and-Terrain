@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4881528272797989543}
   m_Layer: 0
-  m_Name: PlankPlanterHigh_1x2m (1)
+  m_Name: PlankPlanterHigh_1x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
