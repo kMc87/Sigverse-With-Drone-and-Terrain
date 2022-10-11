@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5310736207848272, guid: f77e8d571ebfcc248b9c54b16755f1e0, type: 3}
       propertyPath: m_Name
-      value: Pumpkin_03
+      value: Pumpkin_03 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310736207848272, guid: f77e8d571ebfcc248b9c54b16755f1e0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 817701002518624746, guid: f77e8d571ebfcc248b9c54b16755f1e0,
         type: 3}
