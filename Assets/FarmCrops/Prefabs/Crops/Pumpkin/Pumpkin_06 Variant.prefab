@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 2273481392795320229, guid: 1cdf9aeee5aae9242896f2ad33320d23,
         type: 3}
       propertyPath: m_Name
-      value: Pumpkin_06
+      value: Pumpkin_06 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cdf9aeee5aae9242896f2ad33320d23, type: 3}
