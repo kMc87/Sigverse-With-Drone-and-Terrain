@@ -53,13 +53,13 @@ MonoBehaviour:
   Tier2Requirement: 50
   Tier3Requirement: 100
   Tier4Requirement: 200
-  Tier1Crop: {fileID: 242656800463730263, guid: 524fe51e10ba20f4892c1576223fe4be,
+  Tier1Crop: {fileID: 2500967847786762596, guid: b55cfa8fac523c04482e0d4e208269a8,
     type: 3}
-  Tier2Crop: {fileID: 4797022636307824174, guid: 14c4220768953ed4a96a17fc790823c1,
+  Tier2Crop: {fileID: 8459561434871332063, guid: b1ef821529b96a14ebd427273376823a,
     type: 3}
-  Tier3Crop: {fileID: 242656800463730263, guid: 524fe51e10ba20f4892c1576223fe4be,
+  Tier3Crop: {fileID: 1559965691577045636, guid: c13aaf418f5f0ad49b3c7f76427dc06e,
     type: 3}
-  Tier4Crop: {fileID: 9050232578101463176, guid: 201acb94163bb3446be7005a64426193,
+  Tier4Crop: {fileID: 2757221949659070439, guid: 1bdcd4fa912d3b248be536f06275f106,
     type: 3}
   CropContainer: {fileID: 5528283604513804475}
 --- !u!1 &5528283604513804475
