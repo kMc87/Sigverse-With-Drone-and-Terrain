@@ -75,12 +75,7 @@ PrefabInstance:
     - target: {fileID: 4124569696505717216, guid: 40ba783b2a0a3764faa8940986b722bb,
         type: 3}
       propertyPath: m_Name
-      value: Pumpkin_02 Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124569696505717216, guid: 40ba783b2a0a3764faa8940986b722bb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Pumpkin_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40ba783b2a0a3764faa8940986b722bb, type: 3}
