@@ -22,7 +22,6 @@ TagManager:
   - PlaybackTarget
   - MainMenu
   - AudienceCamera
-  - Crop
   layers:
   - Default
   - TransparentFX
