@@ -47,12 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 10
-  HealthRate: 1
+  HealthRate: 10
   Fertilizer: 0
-  FertilizerRate: 1
-  Tier2Requirement: 50
-  Tier3Requirement: 100
-  Tier4Requirement: 200
+  FertilizerRate: 0
+  Tier2Requirement: 20
+  Tier3Requirement: 40
+  Tier4Requirement: 80
+  GrowLoopDelay: 1
   Tier1Crop: {fileID: 2500967847786762596, guid: b55cfa8fac523c04482e0d4e208269a8,
     type: 3}
   Tier2Crop: {fileID: 8459561434871332063, guid: b1ef821529b96a14ebd427273376823a,

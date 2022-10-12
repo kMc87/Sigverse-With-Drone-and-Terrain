@@ -727,17 +727,17 @@ PrefabInstance:
     - target: {fileID: 5066629204141635292, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5066629204141635292, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5066629204141635292, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5066629204141635292, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
@@ -789,10 +789,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5066629204141863409, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5066629204141863802, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_Name
       value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629204174892496, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629204738143256, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361185, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2fa9246786314f963233a29922d2a, type: 3}
