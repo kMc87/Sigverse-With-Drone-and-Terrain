@@ -4079,7 +4079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4ae80f2074c9046b42e5a93b74f0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objToSpawn: {fileID: 7464818424693290384, guid: 1712e14c806816c4baf9b80f948e0078,
+  objToSpawn: {fileID: 277126113493683600, guid: be2f327b1cf1dce49804b9a330a83c66,
     type: 3}
 --- !u!1 &7314128065087837473
 GameObject:
