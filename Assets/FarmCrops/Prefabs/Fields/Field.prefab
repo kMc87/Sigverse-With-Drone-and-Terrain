@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6788100255064972246}
   m_Layer: 0
   m_Name: Field
-  m_TagString: Untagged
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,12 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 10
-  HealthRate: 1
-  Fertilizer: 0
-  FertilizerRate: 1
-  Tier2Requirement: 50
-  Tier3Requirement: 100
-  Tier4Requirement: 200
+  HealthRate: 10
+  Tier2Requirement: 20
+  Tier3Requirement: 40
+  Tier4Requirement: 80
+  bIsPlanted: 0
+  GrowLoopDelay: 1
   Tier1Crop: {fileID: 2500967847786762596, guid: b55cfa8fac523c04482e0d4e208269a8,
     type: 3}
   Tier2Crop: {fileID: 8459561434871332063, guid: b1ef821529b96a14ebd427273376823a,
@@ -104,10 +104,10 @@ GameObject:
   - component: {fileID: 2576009142721145817}
   - component: {fileID: 3284906671735390593}
   - component: {fileID: 7273030320349512301}
-  - component: {fileID: 5959600533488703362}
+  - component: {fileID: 6916553456069337659}
   m_Layer: 0
   m_Name: Field_3x3m_01
-  m_TagString: Untagged
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,8 +177,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5959600533488703362
-MeshCollider:
+--- !u!65 &6916553456069337659
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -187,7 +187,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1080763118968705830, guid: a4ed575b49f22fb4a90ab29292f14b3f, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.8000002, y: 0.34404725, z: 3.8000002}
+  m_Center: {x: -1.5, y: -0.027976379, z: -1.5}

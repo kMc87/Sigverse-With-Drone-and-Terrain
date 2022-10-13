@@ -23,6 +23,7 @@ TagManager:
   - MainMenu
   - AudienceCamera
   - Crop
+  - Field
   layers:
   - Default
   - TransparentFX
