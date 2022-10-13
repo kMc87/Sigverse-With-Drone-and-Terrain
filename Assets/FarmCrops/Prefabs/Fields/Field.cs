@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
+    //Variables for health management
     public float Health = 10;
     public float HealthRate = 10;
     public float Tier2Requirement = 20;
     public float Tier3Requirement = 40;
     public float Tier4Requirement = 80;
+
+    //Gate control variable to prevent drone from spamming seeds
+    public bool bIsPlanted = false;
     
+    //Variables for handling crop development
     public float GrowLoopDelay = 1;
     int Stage = 0;
 
+    //Variables for managing crop and location references 
     List<GameObject> Crops = new List<GameObject>();
     public GameObject Tier1Crop, Tier2Crop, Tier3Crop, Tier4Crop;
     public GameObject CropContainer;
@@ -26,7 +32,7 @@ public class Field : MonoBehaviour
     void Start()
     {
         //TODO: Impliment Plant() into a seed collision function
-        Plant();
+       
     }
 
 
@@ -39,7 +45,7 @@ public class Field : MonoBehaviour
 
 
     //Initializes field with crops and starts growth cycle
-   void Plant()
+   public void Plant()
     {
         //Loop through objects parented to crop container, spawining crop prefabs at their world location. 
         for(int i = 0; i < CropContainer.transform.childCount; i++)
@@ -70,7 +76,6 @@ public class Field : MonoBehaviour
 
         //Increase health
         Health += HealthRate;
-        Debug.Log(Health);
 
         //Check if we can grow based on what stage we're at
         switch(Stage)
