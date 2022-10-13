@@ -39,14 +39,30 @@ namespace SIGVerse.Drone
             {
 				dc.backward();
             }
-			if (twist.linear.z < 0)
+			if (twist.linear.y > 0)
 			{
 				dc.rightward();
 			}
-			if (twist.linear.z < 0)
+			if (twist.linear.y < 0)
 			{
 				dc.leftward();
 			}
+			if(twist.linear.z>0)
+            {
+				dc.lift();
+            }
+			if(twist.linear.z < 0)
+            {
+				dc.dropper();
+            }
+			if(twist.angular.z>0)
+            {
+				dc.TiltRight();
+            }
+			if(twist.angular.z < 0)
+            {
+				dc.TiltLeft();
+            }
 
 			/*
 			float linearVel = Mathf.Sqrt(Mathf.Pow(twist.linear.x, 2) + Mathf.Pow(twist.linear.y, 2));
