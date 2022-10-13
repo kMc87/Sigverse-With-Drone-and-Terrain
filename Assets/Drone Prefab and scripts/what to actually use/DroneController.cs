@@ -257,7 +257,7 @@ namespace SIGVerse.Drone
 		public void lift()
         {
 
-				Drone.AddRelativeForce(0, LiftSpeed, 0);
+				Drone.AddRelativeForce(0, LiftSpeed*10, 0);
 
 			
 		}
@@ -265,7 +265,7 @@ namespace SIGVerse.Drone
 		public void dropper()
         {
 
-				Drone.AddRelativeForce(0, -LiftSpeed, 0);
+				Drone.AddRelativeForce(0, -LiftSpeed*10, 0);
 
 			
 		}
