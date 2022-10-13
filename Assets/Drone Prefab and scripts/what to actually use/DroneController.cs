@@ -12,6 +12,10 @@ namespace SIGVerse.Drone
 	{
 
 		public Rigidbody Drone;
+
+		public GameObject DroneMarkers;
+		public bool auto = false;
+
 		DronePropellerSpin propellerSpin;
 
 
@@ -41,7 +45,10 @@ namespace SIGVerse.Drone
 
 			TiltCorrection();
 
-			DroneControls();
+			if (auto)
+				DroneAuto();
+			else
+				DroneControls();
 	
 
 		}
@@ -194,6 +201,23 @@ namespace SIGVerse.Drone
 
 			#endregion
 		}
+
+		void DroneAuto()
+        {
+			Vector3 loc = DroneMarkers.transform.GetChild(0).position;
+			float dist = Math.Abs(loc.z - transform.position.z);
+
+			if (transform.position.y < 100)
+			{
+				lift();
+			}
+			else
+            {
+				if (dist > 10)
+					forward();
+			}
+			
+        }
 
 		//forward
 		public void forward()
