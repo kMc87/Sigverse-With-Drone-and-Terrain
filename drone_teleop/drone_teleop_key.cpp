@@ -67,7 +67,6 @@ private:
 
   void jointStateCallback(const sensor_msgs::JointState::ConstPtr& joint_state);
   void moveBase(ros::Publisher &publisher, const double linear_x, const double angular_z);
-
   
   static int calcTrajectoryDuration(const double val, const double current_val);
 
