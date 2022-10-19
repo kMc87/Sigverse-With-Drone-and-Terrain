@@ -24,6 +24,8 @@ TagManager:
   - AudienceCamera
   - Crop
   - Field
+  - tree
+  - rock
   layers:
   - Default
   - TransparentFX
