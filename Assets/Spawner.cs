@@ -12,7 +12,12 @@ public class Spawner : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.T))
         {
-            Instantiate(objToSpawn, transform.position, Quaternion.identity);
+            spawnSeed();
         }
+    }
+
+    public void spawnSeed()
+    {
+        Instantiate(objToSpawn, transform.position, Quaternion.identity);
     }
 }

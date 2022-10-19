@@ -15,6 +15,7 @@ namespace SIGVerse.Drone
 
 		public GameObject DroneMarkers;
 		public bool auto = false;
+		public float autoHeight = 50;
 
 		DronePropellerSpin propellerSpin;
 
@@ -202,12 +203,13 @@ namespace SIGVerse.Drone
 			#endregion
 		}
 
+		//"Ai" controller. Edit this if you want to increase autonomous capabilities
 		void DroneAuto()
         {
 			Vector3 loc = DroneMarkers.transform.GetChild(0).position;
 			float dist = Math.Abs(loc.z - transform.position.z);
 
-			if (transform.position.y < 100)
+			if (transform.position.y < autoHeight)
 			{
 				lift();
 			}

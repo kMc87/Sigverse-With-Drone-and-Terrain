@@ -28,9 +28,15 @@ public class Seed : MonoBehaviour
         //If we collided with field
         if (collision.gameObject.tag == "Field")
         {
+            //Debug.Log(collision.gameObject.name);
             //Get a reference to the Field script attatched to the gameObject
-            Field other = (Field)collision.gameObject.transform.parent.gameObject.GetComponent(typeof(Field));
-            
+            Field other = (Field)collision.gameObject.GetComponent(typeof(Field));
+
+            if (other == null)
+            {
+                other = (Field)collision.gameObject.transform.parent.gameObject.GetComponent(typeof(Field));
+            }
+
             //Pass crop references along
             other.Tier1Crop = Tier1Crop;
             other.Tier2Crop = Tier2Crop;

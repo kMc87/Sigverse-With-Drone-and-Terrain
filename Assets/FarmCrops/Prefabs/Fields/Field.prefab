@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 10
   HealthRate: 10
-  Tier2Requirement: 20
-  Tier3Requirement: 40
-  Tier4Requirement: 80
+  Tier2Requirement: 100
+  Tier3Requirement: 150
+  Tier4Requirement: 200
   bIsPlanted: 0
   GrowLoopDelay: 1
   Tier1Crop: {fileID: 2500967847786762596, guid: b55cfa8fac523c04482e0d4e208269a8,
