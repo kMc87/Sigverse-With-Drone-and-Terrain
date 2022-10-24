@@ -24,6 +24,7 @@ TagManager:
   - AudienceCamera
   - Crop
   - Field
+  - OverviewCamera
   layers:
   - Default
   - TransparentFX

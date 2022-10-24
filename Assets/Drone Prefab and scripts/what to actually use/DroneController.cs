@@ -31,6 +31,7 @@ namespace SIGVerse.Drone
 
         private void Start()
         {
+
         }
 
         void Update()
@@ -298,8 +299,7 @@ namespace SIGVerse.Drone
 		public void screenshotter()
         {
 
-
-				ScreenshotHandler.takeScreenShot_Static(500, 500);
+			ScreenshotHandler.takeScreenShot_Static(500, 500);
 			
 		}
 
