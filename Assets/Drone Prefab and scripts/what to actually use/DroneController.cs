@@ -27,7 +27,7 @@ namespace SIGVerse.Drone
 		private bool moving;
 		public bool landing;
 
-
+		int count = 0;
 		private Vector3 DroneRotation;
 
         private void Start()
@@ -36,7 +36,7 @@ namespace SIGVerse.Drone
 
         void Update()
 		{
-
+			count ++;
 		}
 		//rather than using update which updates every frame, fixed update runs at a fixed interval
 		//this means taht it can update multiple times per frame
@@ -218,8 +218,9 @@ namespace SIGVerse.Drone
 				if (dist > 10)
 					forward();
 			}
-			
-        }
+
+
+		}
 
 		//forward
 		public void forward()
@@ -299,6 +300,7 @@ namespace SIGVerse.Drone
 
 		public void screenshotter()
         {
+
 
 
 				ScreenshotHandler.takeScreenShot_Static(500, 500);

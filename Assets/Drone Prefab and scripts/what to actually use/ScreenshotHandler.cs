@@ -15,15 +15,31 @@ namespace SIGVerse.Drone
 
         public Camera droneScanner;
         private bool takeScreenshotOnNextFrame;
-        
+        int count;
+        string ID;
+        DateTime dt;
+
         private void Awake()
         {
+           
+
             instance = this;
             droneScanner = gameObject.GetComponent<Camera>();
         }
+        private void Update()
+        {
+            
+            dt = DateTime.Now;
+            string name = count.ToString();
 
+            ID = name;
+            
+        }
         private void OnPostRender()
         {
+            count++;
+
+
             if (takeScreenshotOnNextFrame)
             {
                 takeScreenshotOnNextFrame = false;
@@ -33,8 +49,9 @@ namespace SIGVerse.Drone
                 Rect rect = new Rect(0, 0, rednerTexture.width, rednerTexture.height);
                 renderResult.ReadPixels(rect, 0, 0);
 
+                string names = "/ScreenShots/CameraScreenshot{"+ID+"}.png";
                 byte[] byteArray = renderResult.EncodeToPNG();
-                System.IO.File.WriteAllBytes(Application.dataPath + "/CameraScreenshot.png", byteArray);
+                System.IO.File.WriteAllBytes(Application.dataPath + names, byteArray);
 
                 RenderTexture.ReleaseTemporary(rednerTexture);
                 droneScanner.targetTexture = null;
