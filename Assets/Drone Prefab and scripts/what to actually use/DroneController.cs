@@ -26,6 +26,7 @@ namespace SIGVerse.Drone
 		public int LiftSpeed = 14;
 		private bool moving;
 		public bool landing;
+		public bool bTakePhotos = false;
 
 		int count = 0;
 		private Vector3 DroneRotation;
@@ -50,7 +51,15 @@ namespace SIGVerse.Drone
 				DroneAuto();
 			else
 				DroneControls();
-	
+
+			if (Input.GetKey(KeyCode.K))
+			{
+				bTakePhotos = !bTakePhotos;
+				if (bTakePhotos)
+					InvokeRepeating("screenshotter", 0, 1);
+				else
+					CancelInvoke("screenshotter");
+			}
 
 		}
 		void TiltCorrection()
@@ -118,10 +127,7 @@ namespace SIGVerse.Drone
 		{
 			landing = false;
 
-			if (Input.GetKey(KeyCode.K))
-			{
-				screenshotter();
-			}
+			
 			#region drone controls
 			if (!landing)
 			{
@@ -206,7 +212,16 @@ namespace SIGVerse.Drone
 		//"Ai" controller. Edit this if you want to increase autonomous capabilities
 		void DroneAuto()
         {
-			Vector3 loc = DroneMarkers.transform.GetChild(0).position;
+			/*look for number of children the DroneMarkers has
+			 * then create a for loop for the index to cycle through each
+			 * marker
+			 int numChildren = DroneMarkers.transform.childCount;
+			for (int i = 0; i < numChildren; i++)
+			{
+			Transform child = DroneMarkers.transform.GetChild(i);
+			// Do something with the child object...
+			}*/
+			Vector3 loc = DroneMarkers.transform.GetChild(0).position; //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
 			float dist = Math.Abs(loc.z - transform.position.z);
 
 			if (transform.position.y < autoHeight)
