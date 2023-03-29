@@ -3297,6 +3297,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneMarkers
       objectReference: {fileID: 0}
+    - target: {fileID: 3369271500268673597, guid: 466712937e0ae154d994270bd1f9a974,
+        type: 3}
+      propertyPath: m_Name
+      value: marker (0)
+      objectReference: {fileID: 0}
     - target: {fileID: 8046454205070131402, guid: 466712937e0ae154d994270bd1f9a974,
         type: 3}
       propertyPath: m_RootOrder

@@ -211,31 +211,50 @@ namespace SIGVerse.Drone
 
 		//"Ai" controller. Edit this if you want to increase autonomous capabilities
 		void DroneAuto()
-        {
+		{
 			/*look for number of children the DroneMarkers has
 			 * then create a for loop for the index to cycle through each
-			 * marker
-			 int numChildren = DroneMarkers.transform.childCount;
+			 * marker*/
+			/*int numChildren = DroneMarkers.transform.childCount;
 			for (int i = 0; i < numChildren; i++)
 			{
 			Transform child = DroneMarkers.transform.GetChild(i);
 			// Do something with the child object...
 			}*/
-			Vector3 loc = DroneMarkers.transform.GetChild(0).position; //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
-			float dist = Math.Abs(loc.z - transform.position.z);
 
-			if (transform.position.y < autoHeight)
+			int numChildren = DroneMarkers.transform.childCount;
+			
+			for (int i = 0; i < numChildren; i++)
 			{
-				lift();
-			}
-			else
-            {
-				if (dist > 10)
-					forward();
-			}
+				//Transform child = DroneMarkers.transform.GetChild(i);
+				// Do something with the child object...
+				Vector3 loc = DroneMarkers.transform.GetChild(i).position;  //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
+				float dist = Math.Abs(loc.z - transform.position.z);
 
+				if (transform.position.y < autoHeight)
+				{
+					lift();
+				}
+				else
+				{
+					if (dist > 10)
+					{
+						// Calculate the direction vector towards the target location
+						Vector3 direction = (loc - transform.position).normalized;
+						direction.y = 0; // make sure the drone stays level
 
+						// Rotate the drone towards the target direction
+						Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotationSpeed * Time.deltaTime, 0);
+						transform.rotation = Quaternion.LookRotation(newDirection);
+
+						// Move the drone forward in the target direction
+						forward();
+					}
+					
+				}
+			}
 		}
+
 
 		//forward
 		public void forward()
@@ -245,24 +264,26 @@ namespace SIGVerse.Drone
 			Drone.AddRelativeTorque(10, 0, 0);
 
 		}
+
+		//backward
 		public void backward()
         {
-			//backward
 
 			Drone.AddRelativeForce(0, 0, -DirectionalSpeed*10);
 			Drone.AddRelativeTorque(-10, 0, 0);
 
 		}
 
+		//strafe left
 		public void leftward()
         {
 
 				Drone.AddRelativeForce(-DirectionalSpeed*10, 0, 0);
 				Drone.AddRelativeTorque(0, 0, 15);
 
-			
 		}
 
+		//strafe right
 		public void rightward()
         {
 
@@ -272,6 +293,7 @@ namespace SIGVerse.Drone
 			
 		}
 
+		//goes up
 		public void lift()
         {
 
@@ -280,6 +302,7 @@ namespace SIGVerse.Drone
 			
 		}
 
+		//goes down
 		public void dropper()
         {
 
@@ -288,6 +311,7 @@ namespace SIGVerse.Drone
 			
 		}
 
+		//turns left
 		public void TiltLeft()
         {
 
@@ -296,6 +320,7 @@ namespace SIGVerse.Drone
 			
 		}
 
+		//turns right
 		public void TiltRight()
         {
 
@@ -303,6 +328,7 @@ namespace SIGVerse.Drone
 
 			
 		}
+
 		public void lander()
         {
 
@@ -315,8 +341,6 @@ namespace SIGVerse.Drone
 
 		public void screenshotter()
         {
-
-
 
 				ScreenshotHandler.takeScreenShot_Static(500, 500);
 			
