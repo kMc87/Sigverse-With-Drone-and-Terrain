@@ -29,6 +29,10 @@ namespace SIGVerse.Drone
 		public bool bTakePhotos = false;
 
 		int count = 0;
+		//variable to represent drone marker
+		int i = 0;
+		public int tolerance = 1;
+
 		private Vector3 DroneRotation;
 
         private void Start()
@@ -209,6 +213,7 @@ namespace SIGVerse.Drone
 			#endregion
 		}
 
+		
 		//"Ai" controller. Edit this if you want to increase autonomous capabilities
 		void DroneAuto()
 		{
@@ -224,35 +229,39 @@ namespace SIGVerse.Drone
 
 			int numChildren = DroneMarkers.transform.childCount;
 			
-			for (int i = 0; i < numChildren; i++)
+
+			
+			//Transform child = DroneMarkers.transform.GetChild(i);
+			// Do something with the child object...
+			Vector3 loc = DroneMarkers.transform.GetChild(i).position;  //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
+			float distz = Math.Abs(loc.z - transform.position.z);
+			float distx = Math.Abs(loc.x - transform.position.x);
+
+			if (transform.position.y < autoHeight)
 			{
-				//Transform child = DroneMarkers.transform.GetChild(i);
-				// Do something with the child object...
-				Vector3 loc = DroneMarkers.transform.GetChild(i).position;  //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
-				float dist = Math.Abs(loc.z - transform.position.z);
-
-				if (transform.position.y < autoHeight)
-				{
-					lift();
-				}
-				else
-				{
-					if (dist > 10)
-					{
-						// Calculate the direction vector towards the target location
-						Vector3 direction = (loc - transform.position).normalized;
-						direction.y = 0; // make sure the drone stays level
-
-						// Rotate the drone towards the target direction
-						Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotationSpeed * Time.deltaTime, 0);
-						transform.rotation = Quaternion.LookRotation(newDirection);
-
-						// Move the drone forward in the target direction
-						forward();
-					}
-					
-				}
+				lift();
 			}
+
+			if (distz > tolerance || distx > tolerance)
+			{
+				// Calculate the direction vector towards the target location
+				Vector3 direction = (loc - transform.position).normalized;
+				direction.y = 0; // make sure the drone stays level
+
+				// Rotate the drone towards the target direction
+				Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, rotationSpeed * Time.deltaTime, 0);
+				transform.rotation = Quaternion.LookRotation(newDirection);
+
+				// Move the drone forward in the target direction
+				forward();
+			}
+			else if(i+1 < numChildren)
+			{
+				
+				i++;
+			}
+
+			
 		}
 
 
@@ -346,8 +355,8 @@ namespace SIGVerse.Drone
 			
 		}
 
-#region landing
-void land()
+		#region landing
+		void land()
         {
 			landing = true;
 
