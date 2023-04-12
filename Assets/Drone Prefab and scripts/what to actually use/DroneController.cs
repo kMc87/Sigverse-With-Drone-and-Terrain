@@ -60,7 +60,7 @@ namespace SIGVerse.Drone
 			{
 				bTakePhotos = !bTakePhotos;
 				if (bTakePhotos)
-					InvokeRepeating("screenshotter", 0, 1);
+					InvokeRepeating("screenshotter", 0, 5);		//InvokeRepeating("screenshotter", 0, seconds between screenshots);
 				else
 				{
 					CancelInvoke("screenshotter");

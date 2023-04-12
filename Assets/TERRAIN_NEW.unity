@@ -2388,6 +2388,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.57
       objectReference: {fileID: 0}
+    - target: {fileID: 5066629205140361184, guid: 1de2fa9246786314f963233a29922d2a,
+        type: 3}
+      propertyPath: m_HDR
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5066629205140361185, guid: 1de2fa9246786314f963233a29922d2a,
         type: 3}
       propertyPath: m_Enabled
