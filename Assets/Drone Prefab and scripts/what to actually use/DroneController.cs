@@ -30,7 +30,7 @@ namespace SIGVerse.Drone
 
 		int count = 0;
 		//variable to represent drone marker
-		int i = 0;
+		int currentMarker = 0;
 		public int tolerance = 1;
 
 		private Vector3 DroneRotation;
@@ -62,7 +62,9 @@ namespace SIGVerse.Drone
 				if (bTakePhotos)
 					InvokeRepeating("screenshotter", 0, 1);
 				else
+				{
 					CancelInvoke("screenshotter");
+				}
 			}
 
 		}
@@ -217,31 +219,23 @@ namespace SIGVerse.Drone
 		//"Ai" controller. Edit this if you want to increase autonomous capabilities
 		void DroneAuto()
 		{
-			/*look for number of children the DroneMarkers has
-			 * then create a for loop for the index to cycle through each
-			 * marker*/
-			/*int numChildren = DroneMarkers.transform.childCount;
-			for (int i = 0; i < numChildren; i++)
-			{
-			Transform child = DroneMarkers.transform.GetChild(i);
-			// Do something with the child object...
-			}*/
-
+			//maximum number of markers
 			int numChildren = DroneMarkers.transform.childCount;
 			
-
+			//vector position of currentMarker
+			Vector3 loc = DroneMarkers.transform.GetChild(currentMarker).position;  //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
 			
-			//Transform child = DroneMarkers.transform.GetChild(i);
-			// Do something with the child object...
-			Vector3 loc = DroneMarkers.transform.GetChild(i).position;  //Vector3 loc = DroneMarkers.transform.GetChild("index").position;
-			float distz = Math.Abs(loc.z - transform.position.z);
+			//used to find the distance of the current marker on the z and x axis
+			float distz = Math.Abs(loc.z - transform.position.z);	
 			float distx = Math.Abs(loc.x - transform.position.x);
 
+			//brings the drone to safe height; autoHeight can be adjusted within the UI
 			if (transform.position.y < autoHeight)
 			{
 				lift();
 			}
 
+			//turns the drone to the current base
 			if (distz > tolerance || distx > tolerance)
 			{
 				// Calculate the direction vector towards the target location
@@ -255,13 +249,14 @@ namespace SIGVerse.Drone
 				// Move the drone forward in the target direction
 				forward();
 			}
-			else if(i+1 < numChildren)
+
+			//once it reaches the marker, iterates to the next marker, 
+			//and stops at the last marker
+			else if(currentMarker+1 < numChildren)
 			{
-				
-				i++;
+				currentMarker++;
 			}
 
-			
 		}
 
 
